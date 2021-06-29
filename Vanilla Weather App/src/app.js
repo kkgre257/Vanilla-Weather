@@ -4,10 +4,6 @@ function search(city) {
   axios.get(apiURL).then(displayTemperature);
 }
 
-function displayTemperature(response) {
-  console.log(response.data);
-}
-
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
@@ -17,7 +13,7 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-function dispalyTemperature(response) {
+function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
   let cityElement = document.querySelector("#city");
@@ -30,6 +26,7 @@ function dispalyTemperature(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
