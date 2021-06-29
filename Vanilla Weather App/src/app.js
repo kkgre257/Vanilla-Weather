@@ -1,3 +1,12 @@
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
 function search(city) {
   let apiKey = "4bd70506db1d63914f72514fd997e5e8";
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -34,6 +43,8 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
+celsiusTemperature = response.data.main.temp;
+
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -57,3 +68,6 @@ function formatDate(timestamp) {
   }
   return `${day} ${hours}:${minutes}`;
 }
+
+let fahrenheitLink = document.querySelector("#fahernheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
